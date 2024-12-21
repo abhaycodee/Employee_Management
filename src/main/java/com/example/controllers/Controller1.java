@@ -3,8 +3,10 @@ package com.example.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
@@ -141,12 +143,14 @@ public	EmployeeServices employeeServices;
 	
 	// getting the record of the employee using the page by pagination
 	@GetMapping("/user/getbypage")
-	public Page<Employee> getAllEmployeeByPageCon(@RequestParam Integer pagenumber,@RequestParam Integer pagesize)
+	public Page<Employee> getAllEmployeeByPageCon(@RequestParam Integer pagenumber,@RequestParam Integer pagesize , @RequestParam String name)
 	
 	{
+		
+	
 		System.out.println("page number is ="+pagenumber+" pagesize is ="+pagesize);
 		
-		 Page<Employee> allByPageSer = employeeServices.getAllByPageSer(pagenumber, pagesize);
+		 Page<Employee> allByPageSer = employeeServices.getAllByPageSer(pagenumber, pagesize,name);
 		 
 		return allByPageSer;
 		

@@ -1,11 +1,14 @@
 package com.example.services;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
+import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.EmployeeRepository;
@@ -97,13 +100,16 @@ public class EmployeeServices {
 	// getting all the employee pageably
 	
 	
-	public Page<Employee> getAllByPageSer(Integer pagenumber,Integer pagesize)
+	public Page<Employee> getAllByPageSer(Integer pagenumber,Integer pagesize, String sortBy)
 	{
+		
+		
+	
 		
 		Integer pagenumber1=pagenumber;
 		Integer pagesize1=pagesize;
 		
-		PageRequest p = PageRequest.of(pagenumber1, pagesize1);
+		PageRequest p = PageRequest.of(pagenumber1, pagesize1,Sort.by(Sort.Direction.ASC, sortBy));
 		Page<Employee> all = employeeRepository.findAll(p);
 	
 		
